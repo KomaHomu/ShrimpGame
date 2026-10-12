@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqpea0001"]
+
+[ext_resource type="Script" uid="uid://cm8282dq5x7vc" path="res://scripts/ingredient.gd" id="1_pea"]
+[ext_resource type="Texture2D" uid="uid://cybqsjcg4y8sl" path="res://assets/pea_circle.png" id="2_pea"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pea"]
+friction = 0.8
+
+[sub_resource type="Gradient" id="Gradient_pea"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.85, 0.9, 0.8, 1, 0.25, 0.75, 0.25, 1, 0.05, 0.05, 0.05, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pea"]
+radius = 8.0
+
+[node name="Pea" type="Node2D"]
+
+[node name="pea" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+mass = 0.3
+physics_material_override = SubResource("PhysicsMaterial_pea")
+linear_damp = 0.6
+angular_damp = 0.3
+script = ExtResource("1_pea")
+ingredient_name = "pea"
+cook_gradient = SubResource("Gradient_pea")
+
+[node name="Sprite2D" type="Sprite2D" parent="pea"]
+position = Vector2(-1.90735e-06, -0.25)
+scale = Vector2(0.265625, 0.273438)
+texture = ExtResource("2_pea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pea"]
+shape = SubResource("CircleShape2D_pea")

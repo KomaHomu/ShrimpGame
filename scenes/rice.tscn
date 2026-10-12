@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhyh6l7figddd"]
+
+[ext_resource type="Script" uid="uid://bfaas2k27n0or" path="res://scripts/rice.gd" id="1_b8gb7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qx554"]
+friction = 0.8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sotq1"]
+size = Vector2(7, 6)
+
+[node name="Rice" type="Node2D"]
+
+[node name="rice" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_qx554")
+gravity_scale = 2.5
+linear_damp = 0.8
+angular_damp = 0.3
+script = ExtResource("1_b8gb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rice"]
+light_mask = 0
+visibility_layer = 0
+shape = SubResource("RectangleShape2D_sotq1")

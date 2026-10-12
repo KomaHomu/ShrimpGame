@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqpxdhn478wdk"]
+
+[ext_resource type="Texture2D" uid="uid://3y6t8k6j66hv" path="res://assets/shrimp.png" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://fwxgeqd3wdtj" path="res://assets/fire_low1.png" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://bwjhss030b001" path="res://scenes/pan.tscn" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://dpkxhucdb2h81" path="res://scripts/RiceManager.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cbwsucats6gh6" path="res://assets/stove.png" id="3_p57ef"]
+[ext_resource type="Texture2D" uid="uid://cieow54e5dl4a" path="res://assets/fire_low2.png" id="3_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dgameover001" path="res://scenes/GameOverScreen.tscn" id="4_gameoverscene"]
+[ext_resource type="Script" uid="uid://b0hsjbayhrdhx" path="res://scripts/fire.gd" id="4_gee14"]
+[ext_resource type="Script" uid="uid://hbsxke2xuwnu" path="res://scripts/Game.gd" id="5_game"]
+[ext_resource type="PackedScene" uid="uid://dresults001" path="res://scenes/ResultsScreen.tscn" id="6_resultsscene"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gee14"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iywne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u5sy4")
+}],
+"loop": true,
+"name": &"Low",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_cook"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.85, 0.55, 0.15, 1, 0.08, 0.06, 0.05, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_iywne"]
+specular_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(22, 56)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("5_game")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.2496, 0.490347, 0.64, 1)
+position = Vector2(953, 559.5)
+scale = Vector2(2038, 1169)
+texture = SubResource("CanvasTexture_gee14")
+
+[node name="Shrimp" type="Sprite2D" parent="."]
+position = Vector2(611, 548)
+texture = ExtResource("1_yqjtg")
+
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+position = Vector2(1293.5, 760.5)
+scale = Vector2(0.487226, 0.670454)
+sprite_frames = SubResource("SpriteFrames_gee14")
+animation = &"Low"
+frame_progress = 0.883558
+script = ExtResource("4_gee14")
+
+[node name="Stove" type="Sprite2D" parent="."]
+position = Vector2(1290.5, 827)
+scale = Vector2(0.752366, 0.809686)
+texture = ExtResource("3_p57ef")
+
+[node name="Pan" parent="." instance=ExtResource("2_lnu2h")]
+position = Vector2(657, 591)
+
+[node name="RiceManager" type="Node2D" parent="."]
+script = ExtResource("3_lnu2h")
+cook_gradient = SubResource("Gradient_cook")
+
+[node name="StoveLeft" type="StaticBody2D" parent="." groups=["stove_edge"]]
+position = Vector2(1128, 718)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoveLeft"]
+position = Vector2(10.25, 27.25)
+scale = Vector2(21.5, 55.5)
+texture = SubResource("CanvasTexture_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoveLeft"]
+position = Vector2(10, 27)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="StoveRight" type="StaticBody2D" parent="." groups=["stove_edge"]]
+position = Vector2(1438, 718)
+
+[node name="Sprite2D" type="Sprite2D" parent="StoveRight"]
+position = Vector2(10.25, 27.25)
+scale = Vector2(21.5, 55.5)
+texture = SubResource("CanvasTexture_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoveRight"]
+visible = false
+position = Vector2(10, 27)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("4_gameoverscene")]
+
+[node name="ResultsScreen" parent="." instance=ExtResource("6_resultsscene")]

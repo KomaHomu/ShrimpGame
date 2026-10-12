@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwjhss030b001"]
+
+[ext_resource type="Script" uid="uid://b8mdcen6fg32q" path="res://scripts/pan.gd" id="1_bg2j3"]
+[ext_resource type="Texture2D" uid="uid://babywwlfrls7k" path="res://assets/pan.png" id="2_djo8e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bkvwt"]
+friction = 0.8
+
+[node name="Pan" type="AnimatableBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_bkvwt")
+script = ExtResource("1_bg2j3")
+
+[node name="Pan" type="Sprite2D" parent="."]
+position = Vector2(456, 51.5)
+texture = ExtResource("2_djo8e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(310, -1, 312, 117, 915, 119, 915, 18, 867, 17.5, 866, 73.5, 388, 70.5, 388, 0)
+
+[node name="RiceSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(613, 71.5)
+
+[node name="StoveZoneLeft" type="Marker2D" parent="."]
+position = Vector2(388, 71.5)
+
+[node name="StoveZoneRight" type="Marker2D" parent="."]
+position = Vector2(866, 71.5)

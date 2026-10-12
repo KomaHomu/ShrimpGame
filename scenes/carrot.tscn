@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqcarrot001"]
+
+[ext_resource type="Script" path="res://scripts/ingredient.gd" id="1_carrot"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_carrot"]
+friction = 0.8
+bounce = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_carrot"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_carrot"]
+size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="Gradient_carrot"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.95, 0.85, 0.7, 1, 1.0, 0.55, 0.05, 1, 0.05, 0.05, 0.05, 1)
+
+[node name="Carrot" type="Node2D"]
+
+[node name="carrot" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+mass = 0.35
+physics_material_override = SubResource("PhysicsMaterial_carrot")
+linear_damp = 0.6
+angular_damp = 0.3
+script = ExtResource("1_carrot")
+cook_gradient = SubResource("Gradient_carrot")
+ingredient_name = "carrot"
+
+[node name="Sprite2D" type="Sprite2D" parent="carrot"]
+scale = Vector2(16, 16)
+texture = SubResource("CanvasTexture_carrot")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="carrot"]
+shape = SubResource("RectangleShape2D_carrot")
